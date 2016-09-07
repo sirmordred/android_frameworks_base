@@ -937,8 +937,7 @@ public class ActivityManager {
      * @hide
      */
     static public boolean supportsMultiWindow() {
-        return !isLowRamDeviceStatic()
-                && Resources.getSystem().getBoolean(
+        return Resources.getSystem().getBoolean(
                     com.android.internal.R.bool.config_supportsMultiWindow);
     }
 
