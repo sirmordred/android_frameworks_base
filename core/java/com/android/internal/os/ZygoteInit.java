@@ -427,7 +427,7 @@ public class ZygoteInit {
                 Log.i(TAG, "...preloaded " + N + " resources in "
                         + (SystemClock.uptimeMillis()-startTime) + "ms.");
 
-                if (mResources.getBoolean(
+                if (isfreeformWindowManagement() || mResources.getBoolean(
                         com.android.internal.R.bool.config_freeformWindowManagement)) {
                     startTime = SystemClock.uptimeMillis();
                     ar = mResources.obtainTypedArray(
@@ -769,6 +769,13 @@ public class ZygoteInit {
      */
     private static boolean hasSecondZygote(String abiList) {
         return !SystemProperties.get("ro.product.cpu.abilist").equals(abiList);
+    }
+    
+    /**
+     * Return true if the ro.multiwindow.freeform.mode is set to true.
+     */
+    private static boolean isfreeformWindowManagement() {
+        return "true".equals(SystemProperties.get("ro.multiwindow.freeform.mode", "false"));
     }
 
     private static void waitForSecondaryZygote(String socketName) {
